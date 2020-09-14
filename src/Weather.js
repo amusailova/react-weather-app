@@ -1,11 +1,15 @@
 import React from "react";
-import "bootstrap/dist/css/bootstrap.css";
-// Put any other imports below so that CSS from your
-// components takes precedence over default styles.
+
 import "./Weather.css";
+import axios from "axios";
 import ReactAnimatedWeather from "react-animated-weather";
 
 export default function Weather() {
+  const apiKey = "1596a4fb887b619cbb2b5ab4524f4fc0";
+  const api = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
+
+  get.axios(api).then(handleResponse);
+
   return (
     <div className="Weather">
       <div>
