@@ -35,22 +35,26 @@ export default function Weather() {
         </div>
         <div className="row">
           <div className="col-6">
-            <ReactAnimatedWeather
-              icon={"CLEAR_DAY"}
-              color={"#cccbcb"}
-              size={54}
-              animate={true}
-            />
-            <div className="show-degree">
-              <h1 className="degree">24</h1>
-              <div className="degree-change">
-                <span>
-                  <a href="#"> °C </a>
-                </span>
-                |
-                <span>
-                  <a href="#"> °F </a>
-                </span>
+            <div className="clearfix">
+              <div className="image float-left">
+                <ReactAnimatedWeather
+                  icon={"CLEAR_DAY"}
+                  color={"#cccbcb"}
+                  size={60}
+                  animate={true}
+                />
+              </div>
+              <div className="show-degree float-left">
+                <h1 className="degree">24</h1>
+                <div className="degree-change">
+                  <span>
+                    <a href="#"> °C </a>
+                  </span>
+                  |
+                  <span>
+                    <a href="#"> °F </a>
+                  </span>
+                </div>
               </div>
             </div>
           </div>

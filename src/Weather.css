@@ -18,20 +18,19 @@
 ul li {
   list-style: none;
 }
-.show-degree {
-  display: inline;
-}
+
 .degree {
-  display: inline;
+    margin-left: 15px;
   color: #e7e6e6;
-  margin-left: 15px;
-  font-size: 55px;
+  font-size: 60px;
 }
 
 .degree-change {
-  float: right;
   font-size: 16px;
-  margin-left: -10px;
+  position: relative;
+  top: -78px;
+  margin-left: 85px;
+  margin-bottom: -15px;
 }
 .forecast {
   height: 40px;
