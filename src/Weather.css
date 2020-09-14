@@ -25,7 +25,6 @@ ul li {
   color: #e7e6e6;
   font-size: 55px;
   font-weight: 400;
-
 }
 
 .degree-change {
@@ -36,6 +35,7 @@ ul li {
   margin-bottom: -15px;
 }
 .forecast {
+  margin-left: -10px;
   height: 40px;
   text-align: center;
   color: #cccbcb;
@@ -55,4 +55,17 @@ footer {
 .loader {
   text-align: center;
   margin-top: 30%;
+}
+/* Link */
+
+a:link {
+  color: #344554;
+  text-decoration: none;
+}
+a:visited {
+  color: #344554;
+  text-decoration: none;
+}
+a:hover {
+  color: whitesmoke;
 }

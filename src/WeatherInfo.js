@@ -1,19 +1,21 @@
 import React from "react";
 import "./Weather.css";
-import ReactAnimatedWeather from "react-animated-weather";
+
 import WeatherIcon from "./WeatherIcon";
 import FormattedDate from "./FormattedDate";
+import WeatherTemperature from "./WeatherTemperature";
+import WeatherForecast from "./WeatherForecast";
 
 export default function WeatherInfo(props) {
   return (
-    <div classNmae="WeatherInfo">
+    <div className="WeatherInfo">
       <div className="row">
         <ul className="col-6 city-info text-capitalize">
           <li>
-            {props.data.cityName}, {props.data.cityCountry}
+            {props.data.city}, {props.data.cityCountry}
           </li>
           <li>
-            <FormattedDate date={props.data.date} />
+            <small>Last Updated:</small> <FormattedDate date={props.data.date} />
           </li>
           <li>{props.data.description}</li>
         </ul>
@@ -31,16 +33,7 @@ export default function WeatherInfo(props) {
             <WeatherIcon code={props.data.icon} />
           </div>
           <div className="show-degree float-left">
-            <h1 className="degree">{Math.round(props.data.temperature)}</h1>
-            <div className="degree-change">
-              <span>
-                <a href="/"> °C </a>
-              </span>
-              |
-              <span>
-                <a href="/"> °F </a>
-              </span>
-            </div>
+            <WeatherTemperature celsius={props.data.temperature} />
           </div>
         </div>
         <div className="col-6">
@@ -50,68 +43,7 @@ export default function WeatherInfo(props) {
           </ul>
         </div>
       </div>
-      <div className="row forecast">
-        <div className="col-2">
-          <div>Mon</div>
-          <div>
-            <ReactAnimatedWeather
-              icon={"RAIN"}
-              color={"#cccbcb"}
-              size={50}
-              animate={true}
-            />
-          </div>
-          <div>25°C</div>
-        </div>
-        <div className="col-2">
-          <div>Mon</div>
-          <div>
-            <ReactAnimatedWeather
-              icon={"WIND"}
-              color={"#cccbcb"}
-              size={50}
-              animate={true}
-            />
-          </div>
-          <div>25°C</div>
-        </div>
-        <div className="col-2">
-          <div>Mon</div>
-          <div>
-            <ReactAnimatedWeather
-              icon={"RAIN"}
-              color={"#cccbcb"}
-              size={50}
-              animate={true}
-            />
-          </div>
-          <div>25°C</div>
-        </div>
-        <div className="col-2">
-          <div>Mon</div>
-          <div>
-            <ReactAnimatedWeather
-              icon={"SNOW"}
-              color={"#cccbcb"}
-              size={50}
-              animate={true}
-            />
-          </div>
-          <div>25°C</div>
-        </div>
-        <div className="col-2">
-          <div>Mon</div>
-          <div>
-            <ReactAnimatedWeather
-              icon={"FOG"}
-              color={"#cccbcb"}
-              size={50}
-              animate={true}
-            />
-          </div>
-          <div>25°C</div>
-        </div>
-      </div>
+      <WeatherForecast />
 
       <footer>
         <small>

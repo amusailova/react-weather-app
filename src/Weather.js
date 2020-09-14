@@ -1,34 +1,26 @@
 import React, { useState } from "react";
-
 import "./Weather.css";
 import WeatherInfo from "./WeatherInfo";
-
+import WeatherForecast from "./WeatherForecast";
 import axios from "axios";
 import Loader from "react-loader-spinner";
 
 export default function Weather(props) {
   const [weatherData, setWeatherData] = useState({ ready: false });
   const [city, setCity] = useState(props.defaultCity);
+
   function handleResponse(response) {
     setWeatherData({
       ready: true,
       temperature: response.data.main.temp,
-      date: new Date(response.data.dt * 1000),
       humidity: response.data.main.humidity,
-      cityName: response.data.name,
-      cityCountry: response.data.sys.country,
+      date: new Date(response.data.dt * 1000),
       description: response.data.weather[0].description,
-      wind: response.data.wind.speed,
       icon: response.data.weather[0].icon,
+      wind: response.data.wind.speed,
+      city: response.data.name,
+      cityCountry: response.data.sys.country,
     });
-  }
-
-  function search() {
-    const units = "metric";
-    const apiKey = "1596a4fb887b619cbb2b5ab4524f4fc0";
-    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
-
-    axios.get(apiUrl).then(handleResponse);
   }
 
   function handleSubmit(event) {
@@ -39,6 +31,15 @@ export default function Weather(props) {
   function handleCityChange(event) {
     setCity(event.target.value);
   }
+
+  function search() {
+    const units = "metric";
+    const apiKey = "1596a4fb887b619cbb2b5ab4524f4fc0";
+    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
+
+    axios.get(apiUrl).then(handleResponse);
+  }
+
   if (weatherData.ready) {
     return (
       <div className="Weather">
@@ -54,11 +55,11 @@ export default function Weather(props) {
           </button>
         </form>
         <WeatherInfo data={weatherData} />
+        <WeatherForecast city={weatherData.city} />
       </div>
     );
   } else {
     search();
-
     return (
       <div className="loader">
         <Loader type="TailSpin" color="#344554" height={50} width={50} />
