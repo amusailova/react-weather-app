@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 
 import "./Weather.css";
-import FormattedDate from "./FormattedDate";
+import WeatherInfo from "./WeatherInfo";
 import axios from "axios";
-import ReactAnimatedWeather from "react-animated-weather";
 import Loader from "react-loader-spinner";
 
 export default function Weather(props) {
   const [weatherData, setWeatherData] = useState({ ready: false });
-
+  const [city, setCity] = useState(props.defaultCity);
   function handleResponse(response) {
     setWeatherData({
       ready: true,
@@ -23,150 +22,41 @@ export default function Weather(props) {
     });
   }
 
+  function search() {
+    const units = "metric";
+    const apiKey = "1596a4fb887b619cbb2b5ab4524f4fc0";
+    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
+
+    axios.get(apiUrl).then(handleResponse);
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    search();
+  }
+
+  function handleCityChange(event) {
+    setCity(event.target.value);
+  }
   if (weatherData.ready) {
     return (
       <div className="Weather">
-        <div>
-          <form className="main-form row">
-            <input
-              className="form-control col-8"
-              type="text"
-              placeholder="Enter a city..."
-            />
-            <button type="button" className="btn btn-dark col-3">
-              Search
-            </button>
-          </form>
-          <div className="row">
-            <ul className="col-6 city-info text-capitalize">
-              <li>
-                {weatherData.cityName}, {weatherData.cityCountry}
-              </li>
-              <li><FormattedDate date={weatherData.date}/></li>
-              <li>{weatherData.description}</li>
-            </ul>
-            <div className="col-6">
-              <img
-                className="img-responsive"
-                src={require("./pictures/weather.png")}
-                alt="weather"
-              />
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-6">
-              <div className="clearfix">
-                <div className="image float-left">
-                  <ReactAnimatedWeather
-                    icon={"CLEAR_DAY"}
-                    color={"#cccbcb"}
-                    size={60}
-                    animate={true}
-                  />
-                </div>
-                <div className="show-degree float-left">
-                  <h1 className="degree">
-                    {Math.round(weatherData.temperature)}
-                  </h1>
-                  <div className="degree-change">
-                    <span>
-                      <a href="/"> °C </a>
-                    </span>
-                    |
-                    <span>
-                      <a href="/"> °F </a>
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-6">
-              <ul>
-                <li>Wind: {weatherData.wind} km/hr</li>
-                <li>Humidity: {weatherData.humidity} %</li>
-              </ul>
-            </div>
-          </div>
-          <div className="row forecast">
-            <div className="col-2">
-              <div>Mon</div>
-              <div>
-                <ReactAnimatedWeather
-                  icon={"RAIN"}
-                  color={"#cccbcb"}
-                  size={50}
-                  animate={true}
-                />
-              </div>
-              <div>25°C</div>
-            </div>
-            <div className="col-2">
-              <div>Mon</div>
-              <div>
-                <ReactAnimatedWeather
-                  icon={"WIND"}
-                  color={"#cccbcb"}
-                  size={50}
-                  animate={true}
-                />
-              </div>
-              <div>25°C</div>
-            </div>
-            <div className="col-2">
-              <div>Mon</div>
-              <div>
-                <ReactAnimatedWeather
-                  icon={"RAIN"}
-                  color={"#cccbcb"}
-                  size={50}
-                  animate={true}
-                />
-              </div>
-              <div>25°C</div>
-            </div>
-            <div className="col-2">
-              <div>Mon</div>
-              <div>
-                <ReactAnimatedWeather
-                  icon={"SNOW"}
-                  color={"#cccbcb"}
-                  size={50}
-                  animate={true}
-                />
-              </div>
-              <div>25°C</div>
-            </div>
-            <div className="col-2">
-              <div>Mon</div>
-              <div>
-                <ReactAnimatedWeather
-                  icon={"FOG"}
-                  color={"#cccbcb"}
-                  size={50}
-                  animate={true}
-                />
-              </div>
-              <div>25°C</div>
-            </div>
-          </div>
-        </div>
-        <footer>
-          <small>
-            <a href="https://github.com/amusailova/react-weather-app">
-              {" "}
-              Open source code{" "}
-            </a>
-            by Alyona Musailova
-          </small>
-        </footer>
+        <form className="main-form row" onSubmit={handleSubmit}>
+          <input
+            className="form-control col-8"
+            type="text"
+            placeholder="Enter a city..."
+            onChange={handleCityChange}
+          />
+          <button type="button" className="btn btn-dark col-3">
+            Search
+          </button>
+        </form>
+        <WeatherInfo data={weatherData} />
       </div>
     );
   } else {
-    const units = "metric";
-    const apiKey = "1596a4fb887b619cbb2b5ab4524f4fc0";
-    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${props.defaultCity}&appid=${apiKey}&units=${units}`;
-
-    axios.get(apiUrl).then(handleResponse);
+    search();
 
     return (
       <div className="loader">
