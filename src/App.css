@@ -1,7 +1,11 @@
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.App {
+  background-image: linear-gradient(to bottom, #d7d2cc 0%, #304352 100%);
+ padding-top: 15px;;
+  border-radius: 5px;
+  box-shadow: 2px 4px 4px 2px rgb(153, 153, 153);
+  width: 600px;
+  height: 440px;
+  margin: 0 auto;
+  margin-top: 50px;
+  color: #e2e1e1;
 }
-
