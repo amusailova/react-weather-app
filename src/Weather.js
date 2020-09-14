@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import "./Weather.css";
+import FormattedDate from "./FormattedDate";
 import axios from "axios";
 import ReactAnimatedWeather from "react-animated-weather";
 import Loader from "react-loader-spinner";
@@ -12,6 +13,7 @@ export default function Weather(props) {
     setWeatherData({
       ready: true,
       temperature: response.data.main.temp,
+      date: new Date(response.data.dt * 1000),
       humidity: response.data.main.humidity,
       cityName: response.data.name,
       cityCountry: response.data.sys.country,
@@ -40,7 +42,7 @@ export default function Weather(props) {
               <li>
                 {weatherData.cityName}, {weatherData.cityCountry}
               </li>
-              <li>Thursday 14:00</li>
+              <li><FormattedDate date={weatherData.date}/></li>
               <li>{weatherData.description}</li>
             </ul>
             <div className="col-6">
@@ -165,6 +167,7 @@ export default function Weather(props) {
     const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${props.defaultCity}&appid=${apiKey}&units=${units}`;
 
     axios.get(apiUrl).then(handleResponse);
+
     return (
       <div className="loader">
         <Loader type="TailSpin" color="#344554" height={50} width={50} />
