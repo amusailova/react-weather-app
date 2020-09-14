@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import "./Weather.css";
 import WeatherInfo from "./WeatherInfo";
+
 import axios from "axios";
 import Loader from "react-loader-spinner";
 
@@ -18,7 +19,7 @@ export default function Weather(props) {
       cityCountry: response.data.sys.country,
       description: response.data.weather[0].description,
       wind: response.data.wind.speed,
-      // icon: response.data.weather[0].icon,
+      icon: response.data.weather[0].icon,
     });
   }
 

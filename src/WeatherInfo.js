@@ -1,6 +1,7 @@
 import React from "react";
 import "./Weather.css";
 import ReactAnimatedWeather from "react-animated-weather";
+import WeatherIcon from "./WeatherIcon";
 import FormattedDate from "./FormattedDate";
 
 export default function WeatherInfo(props) {
@@ -16,7 +17,7 @@ export default function WeatherInfo(props) {
           </li>
           <li>{props.data.description}</li>
         </ul>
-        <div className="col-6">
+        <div className="col-6 main-forecast">
           <img
             className="img-responsive"
             src={require("./pictures/weather.png")}
@@ -26,26 +27,19 @@ export default function WeatherInfo(props) {
       </div>
       <div className="row">
         <div className="col-6">
-          <div className="clearfix">
-            <div className="image float-left">
-              <ReactAnimatedWeather
-                icon={"CLEAR_DAY"}
-                color={"#cccbcb"}
-                size={60}
-                animate={true}
-              />
-            </div>
-            <div className="show-degree float-left">
-              <h1 className="degree">{Math.round(props.data.temperature)}</h1>
-              <div className="degree-change">
-                <span>
-                  <a href="/"> °C </a>
-                </span>
-                |
-                <span>
-                  <a href="/"> °F </a>
-                </span>
-              </div>
+          <div className="clearfix float-left">
+            <WeatherIcon code={props.data.icon} />
+          </div>
+          <div className="show-degree float-left">
+            <h1 className="degree">{Math.round(props.data.temperature)}</h1>
+            <div className="degree-change">
+              <span>
+                <a href="/"> °C </a>
+              </span>
+              |
+              <span>
+                <a href="/"> °F </a>
+              </span>
             </div>
           </div>
         </div>

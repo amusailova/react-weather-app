@@ -20,9 +20,12 @@ ul li {
 }
 
 .degree {
+  display: inline;
   margin-left: 15px;
   color: #e7e6e6;
-  font-size: 60px;
+  font-size: 55px;
+  font-weight: 400;
+
 }
 
 .degree-change {
