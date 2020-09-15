@@ -34,7 +34,7 @@ export default function Weather(props) {
 
   function search() {
     const units = "metric";
-    const apiKey = "1596a4fb887b619cbb2b5ab4524f4fc0";
+    const apiKey = "201c27f0aeccb3e7b71fb6a07d641c2b";
     const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
 
     axios.get(apiUrl).then(handleResponse);
@@ -46,11 +46,16 @@ export default function Weather(props) {
         <form className="main-form row" onSubmit={handleSubmit}>
           <input
             className="form-control col-8"
-            type="text"
+            type="search"
             placeholder="Enter a city..."
+            autoFocus="on"
             onChange={handleCityChange}
           />
-          <button type="button" className="btn btn-dark col-3">
+          <button
+            type="submit"
+            className="btn btn-dark col-3"
+            onSubmit={handleSubmit}
+          >
             Search
           </button>
         </form>

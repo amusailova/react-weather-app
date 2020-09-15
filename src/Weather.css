@@ -40,7 +40,10 @@ ul li {
   text-align: center;
   color: #cccbcb;
 }
-
+.WeatherForecast {
+  margin-top: -170px;
+  margin-left: -10px;
+}
 .col-2 {
   font-size: 20px;
 }
